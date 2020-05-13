@@ -5,30 +5,36 @@
             <!-- general form elements disabled -->
             <div class="box box-warning">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách Danh mục</h3>
-                    <a href=" <?php echo 'index.php?page=addProduct' ?> " class="btn btn-success btn-xl" style="color: white ; margin-left:82%; " ;>Thêm sản phẩm</a>
+                    <h3 class="box-title">Danh sách đặt hàng</h3>
+                    <a href=" <?php echo 'index.php?page=addProduct' ?> " class="btn btn-success btn-xl" style="color: white ; margin-left:82%; " ;>Thêm đặt hàng</a>
                 </div><!-- /.box-header -->
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>STT</th>
                         <th>Tên</th>
-                        <th>Ảnh</th>
-                        <th>Giá</th>
-                        <th>Trạng thái</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa  chỉ</th>
+                        <th>Số lượng</th>
+                        <th>ghi chú</th>
+                        <th>Ngày đặt</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($product as $key => $value): ?>
+                    <?php foreach ($orders as $key => $value): ?>
                         <tr>
                             <td><?php echo ++$key ?></td>
                             <td><?php echo $value->name ?></td>
-                            <td><img width="50px" src="<?php echo 'uploads/'. $value->image ?>" alt=""></td>
-                            <td><?php echo $value->price ?></td>
+                            <td><?php echo $value->email ?></td>
+                            <td><?php echo $value->phone ?></td>
+                            <td><?php echo $value->address ?></td>
+                            <td><?php echo $value->number ?></td>
+                            <td><?php echo $value->note ?></td>
+                            <td><?php echo $value->created_at ?></td>
 
-                            <?php $check = ($value->status == 1) ? 'Còn sản phẩm' : 'Hết sản phẩm' ?>
-                            <td> <?php echo $check ?></td>
+                            
 
                             <td> <a href="./index.php?page=deleteProduct&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>
                             <td> <a href="./index.php?page=edit&id=<?php echo $value->id; ?>" class="btn btn-sm btn-success">Update</a></td>

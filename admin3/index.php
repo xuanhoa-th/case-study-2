@@ -9,12 +9,24 @@ require "model/Product.php";
 require "controller/ProcuctController.php";
 
 require "model/banner/Banner.php";
-
 require "model/banner/BannerDB.php";
 require "controller/BannerController.php";
+
+require "model/about/AboutDB.php";
+require "model/about/About.php";
+require "controller/AboutController.php";
+
+require "model/oders/Orders.php";
+require "model/oders/OrdersDB.php";
+require "controller/OrdersController.php";
+
+
 use \Controller\ProcuctController;
 use \Controller\CategoryController;
 use \Controller\BannerController;
+use \Controller\AboutController;
+use \Controller\OrdersController;
+
 
 ?>
 
@@ -321,7 +333,7 @@ use \Controller\BannerController;
                     <ul class="sidebar-menu">
                         <li class="active">
                             <a href="index.php">
-                                <i class="fa fa-dashboard"></i> <span>Bảng điều khiển</span>
+                                <i class="fa fa-dashboard"></i> <span>Bảng điều khiển</span> 
                             </a>
                         </li>
                        
@@ -331,7 +343,7 @@ use \Controller\BannerController;
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?php echo 'index.php' ?>"><i class="fa fa-angle-double-right"></i>Quản lý danh mục</a></li>
+                                <li><a href="<?php echo 'index.php?page=listCategory' ?>"><i class="fa fa-angle-double-right"></i>Quản lý danh mục</a></li>
                                 <li><a href="<?php echo 'index.php?page=listProduct' ?>"><i class="fa fa-angle-double-right"></i>Quản lý sản phẩm</a></li>
                                 <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Quản lý đặt bàn</a></li>
                                 <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Quản lý giới thiệu</a></li>
@@ -521,6 +533,8 @@ use \Controller\BannerController;
                   $controller = new CategoryController();
                   $product = new ProcuctController();
                   $banner = new BannerController();
+                  $about = new AboutController();
+                  $orders = new OrdersController();
 
                   $page = isset($_REQUEST['page'])? $_REQUEST['page'] : NULL;
                   switch ($page){
@@ -559,6 +573,17 @@ use \Controller\BannerController;
                     case 'editBanner':
                               $banner->editBanner();
                           break;
+            // -------------------------end banner--------------------------------------------?  
+                    case 'addAbout':
+                              $about->addAbout();
+                          break;  
+            // -------------------------end about--------------------------------------------? 
+                    case 'addOrders':
+                              $orders->addOrders();
+                          break;     
+                    case 'listOrders':
+                              $orders->listOrders();
+                          break;     
                       default:
                          
                           break;

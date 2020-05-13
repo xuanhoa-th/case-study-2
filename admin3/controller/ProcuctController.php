@@ -38,6 +38,7 @@ class ProcuctController
 
             $product = new Product($name, $fileName, $price, $status, $category_id);
             $category = $this->CategoryDB->getAll();
+
             $this->ProductDB->create($product);
             $message = 'Tạo mới thành công';
             include 'view/product/add.php';

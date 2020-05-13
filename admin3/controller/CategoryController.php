@@ -44,7 +44,7 @@ class CategoryController
         } else {
             $id = $_POST['id'];
             $this->CategoryDB->delete($id);
-//            header('Location: ./index.php?');
+            echo "<script>window.location='./index.php?page=listCategory'</script>";
         }
     }
 
@@ -58,7 +58,7 @@ class CategoryController
             $id = $_POST['id'];
             $category = new Category($_POST['name'], $_POST['status']);
             $this->CategoryDB->update($id, $category);
-//            header('Location: ../index.php');
+            echo "<script>window.location='./index.php?page=listCategory'</script>";
         }
     }
 
