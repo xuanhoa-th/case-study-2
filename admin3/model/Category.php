@@ -8,12 +8,12 @@ class Category
 {
     public $id;
     public $name;
-    public $status;
 
-    public function __construct($name, $status)
+
+    public function __construct($name)
     {
         $this->name = $name;
-        $this->status = $status;
+
 
     }
 

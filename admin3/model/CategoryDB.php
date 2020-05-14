@@ -14,10 +14,10 @@ class CategoryDB
     }
 
     public function create($category){
-        $sql = "INSERT INTO category(name,status) VALUES (?, ?)";
+        $sql = "INSERT INTO category(name) VALUES (?)";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(1, $category->name);
-        $statement->bindParam(2, $category->status);
+
         return $statement->execute();
     }
     public function getAll()
@@ -28,7 +28,7 @@ class CategoryDB
         $result = $stmt->fetchAll();
         $categorys = [];
         foreach ($result as $row) {
-            $category = new Category($row['name'], $row['status']);
+            $category = new Category($row['name']);
             $category->id = $row['id'];
             $categorys[] = $category;
         }
@@ -40,7 +40,7 @@ class CategoryDB
         $stmt2->bindParam(1, $id);
         $stmt2->execute();
         $row = $stmt2->fetch();
-        $category = new Category($row['name'], $row['status']);
+        $category = new Category($row['name']);
         $category->id = $row['id'];
         return $category;
     }
@@ -51,10 +51,10 @@ class CategoryDB
         return $statement->execute();
     }
     public function update($id, $category){
-        $sql = "UPDATE category SET name = ?, status = ? WHERE id = ?";
+        $sql = "UPDATE category SET name = ? WHERE id = ?";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(1, $category->name);
-        $statement->bindParam(2, $category->status);
+
         $statement->bindParam(3, $id);
         return $statement->execute();
     }

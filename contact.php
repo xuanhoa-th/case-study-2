@@ -106,7 +106,7 @@
  							</div>
 
  							<div class="col-sm-12">
- 								<textarea name="" class="form-control formcomment" placeholder="Your Need and Description"></textarea>
+ 								<textarea name="" class="form-control formcomment" ></textarea>
  							</div>
  							<div class="col-sm-12">
  								<a href="" class="btn btn-block btn-primary"> Send us a message</a>

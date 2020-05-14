@@ -5,7 +5,7 @@
             <!-- general form elements disabled -->
             <div class="box box-warning">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách đặt hàng</h3>
+                    <h3 class="box-title">Danh sách đặt bàn</h3>
                     <a href=" <?php echo 'index.php?page=addProduct' ?> " class="btn btn-success btn-xl" style="color: white ; margin-left:82%; " ;>Thêm đặt hàng</a>
                 </div><!-- /.box-header -->
                 <table class="table table-hover">
@@ -36,8 +36,8 @@
 
                             
 
-                            <td> <a href="./index.php?page=deleteProduct&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>
-                            <td> <a href="./index.php?page=edit&id=<?php echo $value->id; ?>" class="btn btn-sm btn-success">Update</a></td>
+                            <td> <a href="./index.php?page=deleteOrders&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>
+                            <td> <a href="./index.php?page=editOrders&id=<?php echo $value->id; ?>" class="btn btn-sm btn-success">Update</a></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

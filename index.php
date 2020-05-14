@@ -1,3 +1,11 @@
+
+<?php 
+
+$conn = mysqli_connect('localhost','root','','tasaki');
+mysqli_set_charset($conn,"utf-8");
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en"><head>
 	<title> Artica  </title>
@@ -27,12 +35,12 @@
 						<a href=""><i class="fa fa-google-plus"></i></a>
  					 </div>
  					<div class="datban">
- 						Call for reservation: +84 29 345 678
+ 						Gọi để đặt bàn: +84 29 345 678
  					 </div>
  				</div>
  				<div class="col-sm-6 ">
  					<div class="datban openingtop float-sm-right text-sm-left text-xs-center">
- 						Opening Hours : 9:00am - 10:00pm
+ 						Mở cửa : 9:00am - 10:00pm
  					</div>
  				</div>
  			</div> <!-- het row -->
@@ -49,20 +57,20 @@
 
 			        <ul class="nav navbar-nav float-sm-right">
 			          <li class="nav-item active">
-			            <a class="nav-link" href="index.html">Trang chủ</a>
+			            <a class="nav-link" href="index.php">Trang chủ</a>
 			          </li>
 			          <li class="nav-item">
-			            <a class="nav-link" href="about.html">Giới thiệu</a>
+			            <a class="nav-link" href="about.php">Giới thiệu</a>
 			          </li>
 			          <li class="nav-item">
-			            <a class="nav-link" href="news.html">Tin Tức</a>
+			            <a class="nav-link" href="news.php">Tin Tức</a>
 			          </li>
 			          <li class="nav-item">
-			            <a class="nav-link" href="thucdon.html">Thực Đơn</a>
+			            <a class="nav-link" href="thucdon.php">Thực Đơn</a>
 			          </li>
 			          
 			         <li class="nav-item datbanmenu">
-			            <a class="nav-link btn btn-warning wow bounce" data-wow-iteration="3" href="contact.html" >Đặt bàn</a>
+			            <a class="nav-link btn btn-warning wow bounce" data-wow-iteration="3" href="contact.php" >Đặt bàn</a>
 			          </li>
 			        </ul>
 			      </div>

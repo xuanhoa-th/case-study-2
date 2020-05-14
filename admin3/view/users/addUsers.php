@@ -4,45 +4,39 @@
                         <div class="col-md-8">
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Thêm mới sản phẩm</h3>
+                                    <h3 class="box-title">Thêm mới tài khoản</h3>
                                 </div>
                                 <?php
                                 if(isset($message)){
                                     echo "<p class='alert-info'>$message</p>"; 
                                 }
                                 ?>
-                                <form method="post" enctype="multipart/form-data">
+                                <form method="post">
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Tên sản phẩm</label>
+                                            <label for="exampleInputEmail1">Tên tài khoản</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Ảnh</label>
-                                            <input type="file" class="form-control" id="exampleInputEmail1" name="image">
+                                            <label for="exampleInputEmail1">Số điện thoại</label>
+                                            <input type="number" class="form-control" id="exampleInputEmail1" name="phone">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Giá</label>
-                                            <input type="number" class="form-control" id="exampleInputEmail1" name="price">
+                                            <label for="exampleInputEmail1">Địa chỉ</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" name="address">
                                         </div>
-
-
-
                                         <div class="form-group">
-                                            <label>Danh mục</label>
-                                            <select class="form-control" name="category_id" >
-
-                                                <?php foreach ($category as $value) {?>
-                                                    <option value="<?php echo $value->id?>"> <?php echo $value->name ?> </option>
-                                                <?php }?>
-
-                                            </select>
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" name="email"> 
                                         </div>
-                                       
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Mật khẩu</label>
+                                            <input type="password" class="form-control" id="exampleInputEmail1" name="password">
+                                        </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Trạng thái</label>
-                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="1" name="status" checked>Còn hàng
-                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="0" name="status">Hết hàng
+                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="1" name="status" checked>Hiện tài khoản
+                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="0" name="status">Ẩn tài khoản
                                         </div>
 
                                     </div>

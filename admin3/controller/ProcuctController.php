@@ -24,6 +24,7 @@ class ProcuctController
     public function addProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $category =$this->CategoryDB->getAll();
             include 'view/product/add.php';
         } else {
 
@@ -33,13 +34,13 @@ class ProcuctController
             $category_id = $_REQUEST['category_id'];
             $file = $_FILES['image'];
             $fileName = $file['name'];
-            move_uploaded_file($file['tmp_name'], 'uploads/' . $fileName);
-
-
+            move_uploaded_file($file['tmp_name'], 'uploads/product/'. $fileName);
             $product = new Product($name, $fileName, $price, $status, $category_id);
-            $category = $this->CategoryDB->getAll();
+
 
             $this->ProductDB->create($product);
+
+
             $message = 'Tạo mới thành công';
             include 'view/product/add.php';
         }
@@ -60,6 +61,23 @@ class ProcuctController
         } else {
             $id = $_POST['id'];
             $this->ProductDB->deleteProduct($id);
+            echo "<script>window.location='./index.php?page=listProduct'</script>";
+        }
+    }
+
+    public function editProduct()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'];
+            $product = $this->ProductDB->getIdProduct($id);
+            $category =$this->CategoryDB->getAll();
+//            var_dump($category);
+//            die();
+            include 'view/product/editProduct.php';
+        } else {
+            $id = $_POST['id'];
+            $product = new Product($_POST['name'], $_POST['image'], $_POST['price'], $_POST['status'], $_POST['category_id']);
+            $this->ProductDB->update($id, $product);
             echo "<script>window.location='./index.php?page=listProduct'</script>";
         }
     }

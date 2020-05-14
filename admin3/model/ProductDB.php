@@ -2,6 +2,8 @@
 
 
 namespace Model;
+use Model\Category;
+use Model\CategoryDB;
 
 
 class ProductDB
@@ -16,7 +18,7 @@ class ProductDB
     public function create($product){
         $sql = "INSERT INTO product(name,image,price,status,category_id) VALUES (?, ?, ?, ?, ?)";
         $statement = $this->connection->prepare($sql);
-
+        $
         $statement->bindParam(1, $product->name);
         $statement->bindParam(2, $product->image);
         $statement->bindParam(3, $product->price);
@@ -27,13 +29,13 @@ class ProductDB
 
     public function getAllProduct()
     {
-        $sql = "SELECT * FROM product";
+        $sql = "SELECT product_id,category.name as category_name,image,product.name, product.status,product.price FROM product JOIN category ON product.category_id = category.id ORDER BY `category_name` ASC";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll();
         $products = [];
         foreach ($result as $row) {
-            $product = new Product($row['name'], $row['image'], $row['price'],$row['status'],$row['category_id']);
+            $product = new Product($row['name'], $row['image'], $row['price'],$row['status'],$row['category_name']);
             $product->id = $row['product_id'];
             $products[] = $product;
         }
@@ -47,7 +49,7 @@ class ProductDB
         $stmt->execute();
         $row = $stmt->fetch();
 
-        $product = new Product($row['name'],$row['image'], $row['price'], $row['status']);
+        $product = new Product($row['name'], $row['image'], $row['price'],$row['status'],$row['category_id']);
         $product->id = $row['product_id'];
         return $product;
     }
@@ -56,6 +58,17 @@ class ProductDB
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $id);
         return $stmt->execute();
+    }
+
+    public function update($id, $product){
+        $sql = "UPDATE product SET name = ?, image = ?, price = ?,category_id = ? WHERE id = ?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(1, $product->name);
+        $statement->bindParam(2, $product->image);
+        $statement->bindParam(3, $product->price);
+        $statement->bindParam(4, $product->category_id);
+        $statement->bindParam(5, $id);
+        return $statement->execute();
     }
 
 

@@ -20,12 +20,17 @@ require "model/oders/Orders.php";
 require "model/oders/OrdersDB.php";
 require "controller/OrdersController.php";
 
+require "model/users/Users.php";
+require "model/users/UsersDB.php";
+require "controller/UsersController.php";
+
 
 use \Controller\ProcuctController;
 use \Controller\CategoryController;
 use \Controller\BannerController;
 use \Controller\AboutController;
 use \Controller\OrdersController;
+use \Controller\UsersController;
 
 
 ?>
@@ -345,9 +350,9 @@ use \Controller\OrdersController;
                             <ul class="treeview-menu">
                                 <li><a href="<?php echo 'index.php?page=listCategory' ?>"><i class="fa fa-angle-double-right"></i>Quản lý danh mục</a></li>
                                 <li><a href="<?php echo 'index.php?page=listProduct' ?>"><i class="fa fa-angle-double-right"></i>Quản lý sản phẩm</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Quản lý đặt bàn</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Quản lý giới thiệu</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Quản lý Tin tức</a></li>
+                                <li><a href="<?php echo 'index.php?page=listOrders' ?>"><i class="fa fa-angle-double-right"></i> Quản lý đặt bàn</a></li>
+                                <li><a href="<?php echo 'index.php?page=listAbout'?>"><i class="fa fa-angle-double-right"></i> Quản lý giới thiệu</a></li>
+                               <!--  <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Quản lý Tin tức</a></li> -->
                                 <li><a href="<?php echo 'index.php?page=listBanner' ?>"><i class="fa fa-angle-double-right"></i> Quản lý Banner</a></li>
                             </ul>
                         </li>
@@ -366,66 +371,7 @@ use \Controller\OrdersController;
                                 <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
                             </ul>
                         </li>
-                       <!--  <li class="treeview">
-                            <a href="">
-                                <i class="fa fa-table"></i> <span>Baner</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                           
-                        </li> -->
-                        <!-- <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Tables</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                            </ul>
-                        </li> -->
-                       <!--  <li>
-                            <a href="pages/calendar.html">
-                                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                                <small class="badge pull-right bg-red">3</small>
-                            </a>
-                        </li> -->
-                       <!--  <li>
-                            <a href="pages/mailbox.html">
-                                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                                <small class="badge pull-right bg-yellow">12</small>
-                            </a>
-                        </li> -->
-                         <!-- <li>
-                            <a href="pages/widgets.html">
-                                <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
-                            </a>
-                        </li> -->
-                        <!-- <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>Charts</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
-                            </ul>
-                        </li> -->
-                       <!--  <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>UI Elements</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                                <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                                <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                            </ul>
-                        </li> -->
+                       
                        
                     </ul>
                 </section>
@@ -535,6 +481,7 @@ use \Controller\OrdersController;
                   $banner = new BannerController();
                   $about = new AboutController();
                   $orders = new OrdersController();
+                  $users = new UsersController();
 
                   $page = isset($_REQUEST['page'])? $_REQUEST['page'] : NULL;
                   switch ($page){
@@ -560,6 +507,9 @@ use \Controller\OrdersController;
                     case 'deleteProduct':
                          $product->deleteProduct();
                           break;
+                     case 'editProduct':
+                         $product->editProduct(); 
+                          break;
             // -------------------------end product--------------------------------------------?
                     case 'addBanner':
                               $banner->addBanner();
@@ -576,6 +526,15 @@ use \Controller\OrdersController;
             // -------------------------end banner--------------------------------------------?  
                     case 'addAbout':
                               $about->addAbout();
+                          break; 
+                     case 'listAbout':
+                              $about->listAbout();
+                          break; 
+                     case 'deleteAbout':
+                              $about->deleteAbout();
+                          break; 
+                     case 'editAbout':
+                              $about->editAbout();
                           break;  
             // -------------------------end about--------------------------------------------? 
                     case 'addOrders':
@@ -584,6 +543,28 @@ use \Controller\OrdersController;
                     case 'listOrders':
                               $orders->listOrders();
                           break;     
+                    case 'deleteOrders':
+                              $orders->deleteOrders();
+                          break;     
+                    case 'editOrders':
+                              $orders->editOrders();
+                          break; 
+            // -------------------------end orders--------------------------------------------?
+                    case 'addUsers':
+                              $users->addUsers();
+                          break;     
+                    case 'listUsers':
+                              $users->listUsers();
+                          break;     
+                    case 'deleteUsers':
+                              $users->deleteUsers();
+                          break;     
+                    case 'editUsers':
+                              $users->editUsers();
+                          break; 
+            // -------------------------end users--------------------------------------------?
+
+
                       default:
                          
                           break;

@@ -4,8 +4,8 @@
         <div class="col-md-10">
             <div class="box box-warning">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách Danh mục</h3>
-                    <a href=" <?php echo 'index.php?page=addProduct' ?> " class="btn btn-success btn-xl" style="color: white ; margin-left:82%; " ;>Thêm sản phẩm</a>
+                    <h3 class="box-title">Danh sách giới thiệu</h3>
+                    <a href=" <?php echo 'index.php?page=addAbout' ?> " class="btn btn-success btn-xl" style="color: white ; margin-left:82%; " ;>Thêm giới thiệu</a>
                 </div><!-- /.box-header -->
                 <table class="table table-hover">
                     <thead>
@@ -13,25 +13,24 @@
                         <th>STT</th>
                         <th>Tên</th>
                         <th>Ảnh</th>
-                        <th>Giá</th>
-                        <th>Danh mục</th>
+                        <th>Nội dung</th>
                         <th>Trạng thái</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($product as $key => $value): ?>
+                    <?php foreach ($about as $key => $value): ?>
                         <tr>
                             <td><?php echo ++$key ?></td>
                             <td><?php echo $value->name ?></td>
-                            <td><img width="50px" src="<?php echo 'uploads/'. $value->image ?>" alt=""></td>
-                            <td><?php echo $value->price ?></td>
-                            <td> <?php echo $value->category_id ?> </td>
-                            <?php $check = ($value->status == 1) ? 'Còn sản phẩm' : 'Hết sản phẩm' ?>
+                            <td><img width="50px" src="<?php echo 'uploads/about/'. $value->image ?>" alt=""></td>
+                            <td><?php echo $value->content ?></td>
+                            
+                            <?php $check = ($value->status == 1) ? 'Hiện bài viết' : 'Ẩn bài viết' ?>
                             <td> <?php echo $check ?></td>
 
-                            <td> <a href="./index.php?page=deleteProduct&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>
-                            <td> <a href="./index.php?page=editProduct&id=<?php echo $value->id; ?>" class="btn btn-sm btn-success">Update</a></td>
+                            <td> <a href="./index.php?page=deleteAbout&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>
+                            <td> <a href="./index.php?page=editAbout&id=<?php echo $value->id; ?>" class="btn btn-sm btn-success">Update</a></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

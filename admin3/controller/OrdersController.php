@@ -41,4 +41,31 @@ class OrdersController
         include 'view/orders/listOrders.php';
     }
 
+    public function deleteOrders()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'];
+            $orders = $this->OrdersDB->getOrders($id);
+            include 'view/orders/deleteOrders.php';
+        } else {
+            $id = $_POST['id'];
+            $this->OrdersDB->deleteOrders($id);
+            echo "<script>window.location='./index.php?page=listOrders'</script>";
+        }
+    }
+
+    public function editOrders()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'];
+            $order = $this->OrdersDB->getOrders($id);
+            include 'view/orders/editOrders.php';
+        } else {
+            $id = $_POST['id'];
+            $order = new Orders($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['number'], $_POST['note'], $_POST['created_at']);
+            $this->OrdersDB->update($id, $order);
+            echo "<script>window.location='./index.php?page=listOrders'</script>";
+        }
+    }
+
 }

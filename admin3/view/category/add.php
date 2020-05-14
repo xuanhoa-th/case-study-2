@@ -17,11 +17,7 @@
                                             <label for="exampleInputEmail1">Tên danh mục</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="name">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Trạng thái</label>
-                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="1" name="status">Còn hàng
-                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="0" name="status">Hết hàng
-                                        </div>
+
 
                                     </div>
 

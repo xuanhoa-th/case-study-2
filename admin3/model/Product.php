@@ -24,13 +24,6 @@ class Product
 
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCategoryId()
-    {
-        return $this->category_id;
-    }
 
 
 

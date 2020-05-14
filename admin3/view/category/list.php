@@ -22,8 +22,8 @@
                         <tr>
                             <td><?php echo ++$key ?></td>
                             <td><?php echo $value->name ?></td>
-                            <?php $check = ($value->status == 1) ? 'Hiện danh mục' : 'Ẩn danh mục' ?>
-                            <td> <?php echo $check ?></td>
+<!--                            --><?php //$check = ($value->status == 1) ? 'Hiện danh mục' : 'Ẩn danh mục' ?>
+<!--                            <td> --><?php //echo $check ?><!--</td>-->
 
                             <td> <a href="./index.php?page=delete&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>
                             <td> <a href="./index.php?page=edit&id=<?php echo $value->id; ?>" class="btn btn-sm btn-success">Update</a></td>

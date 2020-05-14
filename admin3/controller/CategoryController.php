@@ -22,24 +22,26 @@ class CategoryController
         } else {
 
             $name = $_POST['name'];
-            $status = $_POST['status'];
 
-            $category = new Category($name, $status);
+            $category = new Category($name);
             $this->CategoryDB->create($category);
-            $message = 'Khách hàng tạo ra';
+            $message = 'Tạo mới thành công';
             include 'view/category/add.php';
+
         }
     }
 
     public function listCategory(){
         $categorys = $this->CategoryDB->getAll();
         include 'view/category/list.php';
+
     }
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $id = $_GET['id'];
             $category = $this->CategoryDB->get($id);
+
             include 'view/category/delete.php';
         } else {
             $id = $_POST['id'];
@@ -56,7 +58,7 @@ class CategoryController
             include 'view/category/edit.php';
         } else {
             $id = $_POST['id'];
-            $category = new Category($_POST['name'], $_POST['status']);
+            $category = new Category($_POST['name']);
             $this->CategoryDB->update($id, $category);
             echo "<script>window.location='./index.php?page=listCategory'</script>";
         }
