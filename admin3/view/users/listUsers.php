@@ -28,7 +28,7 @@
                             <td><?php echo $value->phone ?></td>
                             <td> <?php echo $value->address ?> </td>
                             <td> <?php echo $value->email ?> </td>
-                            <?php $check = ($value->status == 1) ? 'Ẩn tài khoản' : ' Hiện tài khoản' ?>
+                            <?php $check = ($value->status == 1) ? 'Ẩn' : ' Hiện' ?>
                             <td> <?php echo $check ?></td>
 
                             <td> <a href="./index.php?page=deleteUsers&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>

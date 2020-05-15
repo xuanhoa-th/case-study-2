@@ -35,8 +35,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Trạng thái</label>
-                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="1" name="status" checked>Hiện tài khoản
-                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="0" name="status">Ẩn tài khoản
+                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="1" name="status" checked>Hiện
+                                            <input type="radio" class="form-control" id="exampleInputPassword1" value="0" name="status">Ẩn
                                         </div>
 
                                     </div>

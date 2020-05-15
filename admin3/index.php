@@ -23,6 +23,7 @@ require "controller/OrdersController.php";
 require "model/users/Users.php";
 require "model/users/UsersDB.php";
 require "controller/UsersController.php";
+// require "controller/fontEndController.php";
 
 
 use \Controller\ProcuctController;
@@ -31,6 +32,7 @@ use \Controller\BannerController;
 use \Controller\AboutController;
 use \Controller\OrdersController;
 use \Controller\UsersController;
+// use \Controller\fontEndController;
 
 
 ?>
@@ -359,16 +361,11 @@ use \Controller\UsersController;
                          <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-folder"></i> <span>Tài khoản</span>
-                                <i class="fa fa-angle-left pull-right"></i>
+                                <i class="fa fa-angle-left pull-right"></i> 
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
-                                <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
-                                <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                                <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                                <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                                <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                                <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
+                                <li><a href="<?php echo 'index.php?page=listUsers'?>"><i class="fa fa-angle-double-right"></i>Danh sách tài khoản</a></li>
+                                <li><a href="<?php echo 'index.php?page=addUsers'?>"><i class="fa fa-angle-double-right"></i>Thêm tài khoản</a></li>
                             </ul>
                         </li>
                        
@@ -482,6 +479,7 @@ use \Controller\UsersController;
                   $about = new AboutController();
                   $orders = new OrdersController();
                   $users = new UsersController();
+                  // $fontend = new fontEndController();
 
                   $page = isset($_REQUEST['page'])? $_REQUEST['page'] : NULL;
                   switch ($page){
@@ -566,7 +564,7 @@ use \Controller\UsersController;
 
 
                       default:
-                         
+                      
                           break;
                   }
 

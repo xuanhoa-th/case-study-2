@@ -18,7 +18,7 @@ class ProductDB
     public function create($product){
         $sql = "INSERT INTO product(name,image,price,status,category_id) VALUES (?, ?, ?, ?, ?)";
         $statement = $this->connection->prepare($sql);
-        $
+
         $statement->bindParam(1, $product->name);
         $statement->bindParam(2, $product->image);
         $statement->bindParam(3, $product->price);
@@ -61,13 +61,14 @@ class ProductDB
     }
 
     public function update($id, $product){
-        $sql = "UPDATE product SET name = ?, image = ?, price = ?,category_id = ? WHERE id = ?";
+        $sql = "UPDATE `product` SET `name`=?,`image`=?,`price`=?,`status`=?,`category_id`=? WHERE `product_id`=?";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(1, $product->name);
         $statement->bindParam(2, $product->image);
         $statement->bindParam(3, $product->price);
-        $statement->bindParam(4, $product->category_id);
-        $statement->bindParam(5, $id);
+        $statement->bindParam(4, $product->status);
+        $statement->bindParam(5, $product->category_id);
+        $statement->bindParam(6, $id);
         return $statement->execute();
     }
 

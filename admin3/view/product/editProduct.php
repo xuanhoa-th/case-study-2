@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ảnh</label>
-                            <img width="70px" src="<?php echo 'uploads/'. $product->image ?>" alt="">
+                            <img width="90px" src="<?php echo 'uploads/product/'. $product->image ?>" alt="">
                             <input type="file" class="form-control" id="exampleInputEmail1" name="image"  value="<?php echo $product->image; ?>">
                         </div>
                         <div class="form-group">
@@ -30,8 +30,7 @@
                             <select class="form-control" name="category_id"  >
 
                                 <?php foreach ($category as $item) {?>
-
-                                    <option value="" <?php if ($product->category_id == $item->id){?>
+                                    <option value="<?php echo $item->id?>" <?php if ($product->category_id == $item->id){?>
                                         selected
                                     <?php }?> > <?php echo $item->name?> </option>
                                 <?php }?>

@@ -24,10 +24,10 @@
                         <tr>
                             <td><?php echo ++$key ?></td>
                             <td><?php echo $value->name ?></td>
-                            <td><img width="50px" src="<?php echo 'uploads/'. $value->image ?>" alt=""></td>
+                            <td><img width="80px" src="<?php echo 'uploads/product/'. $value->image ?>" alt=""></td>
                             <td><?php echo $value->price ?></td>
                             <td> <?php echo $value->category_id ?> </td>
-                            <?php $check = ($value->status == 1) ? 'Còn sản phẩm' : 'Hết sản phẩm' ?>
+                            <?php $check = ($value->status == 1) ? 'Còn' : 'Hết' ?>
                             <td> <?php echo $check ?></td>
 
                             <td> <a href="./index.php?page=deleteProduct&id=<?php echo $value->id; ?>" class="btn btn-warning btn-sm">Delete</a></td>

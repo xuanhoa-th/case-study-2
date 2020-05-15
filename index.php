@@ -1,82 +1,39 @@
+<?php include "header.php";?>
 
 <?php 
+$about = mysqli_query($conn,"SELECT * FROM about WHERE status = 0 ");
+$about2 = mysqli_query($conn,"SELECT * FROM about WHERE status = 2 ");
+$category = mysqli_query($conn,"SELECT * FROM category ");
+// $product = mysqli_query($conn,"SELECT * FROM product LIMIT 5 ");
+$productSushi = mysqli_query($conn,"SELECT * FROM product WHERE category_id = 8 ");
+$productCom = mysqli_query($conn,"SELECT * FROM product WHERE category_id = 11 ");
+$productLau = mysqli_query($conn,"SELECT * FROM product WHERE category_id = 12 ");
 
-$conn = mysqli_connect('localhost','root','','tasaki');
-mysqli_set_charset($conn,"utf-8");
+if(isset($_GET['id'])){
+		$id = $_GET['id'];
+		$productss = mysqli_query($conn,"SELECT * FROM product ");
+		$limit = 4;
+		$total = mysqli_num_rows($productss);
+		$page = ceil($total/$limit);
+		(isset($_GET['page'])) ? $curent_page = $_GET['page']: $curent_page=1;
+		$start = ($curent_page - 1)*$limit;
+		$product = mysqli_query($conn,"SELECT * FROM product WHERE status = 1 LIMIT $start,$limit");
+	}
+	else{
+		$limit = 4;
+		$productss = mysqli_query($conn,"SELECT * FROM product WHERE status = 1");
+		$total = mysqli_num_rows($productss);
+		$page = ceil($total/$limit);
+		(isset($_GET['page'])) ? $curent_page = $_GET['page']: $curent_page=1;
+		$start = ($curent_page - 1)*$limit;
+		$product = mysqli_query($conn,"SELECT * FROM product WHERE status = 1 LIMIT $start,$limit");
+
+	}
+// var_dump($product);
+// die();
+
 
  ?>
-
-<!DOCTYPE html>
-<html lang="en"><head>
-	<title> Artica  </title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">  
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&amp;subset=vietnamese" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
-	<script type="text/javascript" src="vendor/bootstrap.js"></script>
- 	<script type="text/javascript" src="vendor/isotope.pkgd.min.js"></script>
- 	<script type="text/javascript" src="vendor/imagesloaded.pkgd.min.js"></script>
- 	<script type="text/javascript" src="1.js"></script>
-	<link rel="stylesheet" href="vendor/bootstrap.css">
-	<link rel="stylesheet" href="vendor/font-awesome.css">
-	<link rel="stylesheet" href="1.css">
- </head>
-<body >	
-	
- 	<div class="topheader">
- 		<div class="container">
- 			<div class="row">
- 				<div class="col-sm-6 wow jello">
- 					<div class="mangxh float-sm-left text-xs-center text-sm-left">
-						<a href=""><i class="fa fa-facebook"></i></a>
-						<a href=""><i class="fa fa-twitter"></i></a>
-						<a href=""><i class="fa fa-pinterest"></i></a>
-						<a href=""><i class="fa fa-google-plus"></i></a>
- 					 </div>
- 					<div class="datban">
- 						Gọi để đặt bàn: +84 29 345 678
- 					 </div>
- 				</div>
- 				<div class="col-sm-6 ">
- 					<div class="datban openingtop float-sm-right text-sm-left text-xs-center">
- 						Mở cửa : 9:00am - 10:00pm
- 					</div>
- 				</div>
- 			</div> <!-- het row -->
- 		</div> <!-- het container -->
- 	</div> <!-- het topheader  -->
- 	<div class="logovamenu">
-	    <nav class="navbar navbar-light  fontroboto">
-	    	<div class="container">    	
-			      <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#mtren">
-			       
-			      </button>
-			      <div class="collapse navbar-toggleable-xs" id="mtren">
-			        <a class="navbar-brand text-xs-center text-sm-left" href="#"><img src="images/banner/logo1.png" alt=""></a>
-
-			        <ul class="nav navbar-nav float-sm-right">
-			          <li class="nav-item active">
-			            <a class="nav-link" href="index.php">Trang chủ</a>
-			          </li>
-			          <li class="nav-item">
-			            <a class="nav-link" href="about.php">Giới thiệu</a>
-			          </li>
-			          <li class="nav-item">
-			            <a class="nav-link" href="news.php">Tin Tức</a>
-			          </li>
-			          <li class="nav-item">
-			            <a class="nav-link" href="thucdon.php">Thực Đơn</a>
-			          </li>
-			          
-			         <li class="nav-item datbanmenu">
-			            <a class="nav-link btn btn-warning wow bounce" data-wow-iteration="3" href="contact.php" >Đặt bàn</a>
-			          </li>
-			        </ul>
-			      </div>
-	      </div> <!-- het container -->
-	    </nav>
- 	</div> <!-- het logo va menu -->
  	
 <div class="slide">
  	<div id="slidehome" class="carousel slide slidecon" data-ride="carousel">
@@ -89,25 +46,19 @@ mysqli_set_charset($conn,"utf-8");
 				<div class="carousel-item active">
  							
  							<div class="chu">
- 								<!-- <h2 class=" fontoswarld">The Fresh And Tasty Burgers </h2> -->
- 								<!-- <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  </p> -->
- 								<!-- <a href="" class="nutslide fontoswarld btn btn-warning"> Buy Now</a> -->
+ 								
  							</div>
  							<img src="images/banner/Banner1.jpg" alt="">
  						</div>
  						<div class="carousel-item">
  							<div class="chu">
- 								<!-- <h2 class=" fontoswarld">The Fresh And Tasty Burgers </h2>
- 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  </p> -->
- 								<!-- <a href="" class="nutslide fontoswarld btn btn-warning"> Buy Now</a> -->
+ 								
  							</div>
  							<img src="images/banner/banner2.jpg" alt="">
  						</div>
  						<div class="carousel-item">
  							<div class="chu">
- 								<!-- <h2 class=" fontoswarld">The Fresh And Tasty Burgers </h2>
- 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  </p> -->
- 								<!-- <a href="" class="fontoswarld nutslide btn btn-warning"> Buy Now</a> -->
+ 								
  							</div>
  							<img src="images/banner/banner_3.jpg" alt="">
  						</div>
@@ -132,19 +83,19 @@ mysqli_set_charset($conn,"utf-8");
  					<a href=""><img src="images/banner/uu_dai_hom_nay_1.jpg" alt="" class="img-fluid"></a>
  					<h3><a href="">Our Restaruant Story</a></h3>
  					<p>TẶNG 1000 SUẤT COMBO THỎA THÍCH 239K CHO NHÓM 4</p>
- 					<a href="" class="readmore">Read More</a>
+ 					<a href="" class="readmore">Đọc thêm</a>
  				</div>
 				<div class="col-sm-4 wow flipInY" data-wow-delay="1s">
  					<a href=""><img src="images/banner/uu_dai_hom_nay.jpg" alt="" class="img-fluid"></a>
  					<h3><a href="">Our Restaruant Story</a></h3>
  					<p>THỨ 3 HẠNH PHÚC - GIẢM 15% CHO THẺ MEMBER REDSUN</p>
- 					<a href="" class="readmore">Read More</a>
+ 					<a href="" class="readmore">Đọc thêm</a>
  				</div>
 				<div class="col-sm-4 wow flipInY" data-wow-delay="1.5s">
  					<a href=""><img src="images/banner/uu_dai_hom_nay_2.jpg" alt="" class="img-fluid"></a>
  					<h3><a href="">Our Restaruant Story</a></h3>
  					<p>ƯU ĐÃI HẤP DẪN VỚI CHƯƠNG TRÌNH MUA 2 TẶNG 1 SET LUNCH</p>
- 					<a href="" class="readmore">Read More</a>	
+ 					<a href="" class="readmore">Đọc thêm</a>	
  				</div>				
  			</div> <!-- het row -->
  		</div> <!--  het container -->
@@ -154,77 +105,81 @@ mysqli_set_charset($conn,"utf-8");
  			<div class="container">
  				<div class="row">
  					<div class="col-sm-8 push-sm-2">
- 						<span class="tieudephu fontdancing">Our Delicious Menu Items</span>
- 						<h3 class="tieudechinh fontroboto">Fresh And Healthy Food Available</h3>
+ 						<span class="tieudephu fontdancing">Mục menu ngon của chúng tôi</span>
+ 						<h3 class="tieudechinh fontroboto">Thực phẩm tươi và tốt cho sức khỏe</h3>
  					</div>
  				</div>
  			</div>
  			
  		</div>   <!-- HET TIEUDEKHOIMENU -->
  	</div>  <!-- HET KHOI MENU -->
-
  	<div class="thucdonct wow fadeInUp">
  		<div class="tieudect text-xs-center fontroboto">
+
  			<a href="" data-monan="*">All </a>
- 			<a href="" data-monan=".sang">Sushi</a>
+ 			<a href="id=3" data-monan=".sang">Sushi</a>
  			<a href="" data-monan=".trua">SET Cơm</a>
  			<a href="" data-monan=".toi">BUFFET Lẩu</a> 
  		</div>
  		<div class="noidungct">
  			 <div class="container">
  			 	<div class="row nhieumon">
+ 			 		<?php foreach ($productSushi as $value): ?>
+ 			 			
+ 			 		
  			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon sang">
  			 			<div class="row">
  			 				<div class="col-xs-3 col-sm-4">
  			 					<div class="anhmon">
  			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/1.jpg" alt="" class="img-fluid">
+ 			 						<img src=" <?php echo 'admin3/uploads/product/'. $value['image']  ?> " alt="" class="img-fluid">
  			 					</div>
-
- 			 					
  			 				</div>
  			 				<div class="col-xs-9 col-sm-8">
  			 					<div class="tenmon">
  			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
+ 			 							<span class="float-xs-right"><?php echo $value['price'] ?>.vnđ</span>
+ 			 							<b class="ten"><?php echo $value['name'] ?></b>
  			 						</div>
  			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
+ 			 							
  			 						</div>
  			 					</div>
  			 				</div>
  			 			</div> <!-- het row -->
  			 		</div>  <!-- het motmon -->
+ 			 		<?php endforeach ?>
+ 			 		<?php foreach ($productCom as $value): ?>
  			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon toi">
  			 			<div class="row">
  			 				<div class="col-xs-3 col-sm-4">
  			 					<div class="anhmon">
  			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/2.jpg" alt="" class="img-fluid">
+ 			 						<img src="<?php echo 'admin3/uploads/product/'. $value['image']  ?> " alt="" class="img-fluid">
  			 					</div>
-
- 			 					
  			 				</div>
  			 				<div class="col-xs-9 col-sm-8">
  			 					<div class="tenmon">
  			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
+ 			 							<span class="float-xs-right"><?php echo $value['price'] ?>.vnđ</span>
+ 			 							<b class="ten"><?php echo $value['name'] ?></b>
  			 						</div>
  			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
+ 			 							
  			 						</div>
  			 					</div>
  			 				</div>
  			 			</div> <!-- het row -->
  			 		</div>  <!-- het motmon -->
+					<?php endforeach ?>
+
+					<?php foreach ($productLau as $value): ?>
  			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon trua">
  			 			<div class="row">
  			 				<div class="col-xs-3 col-sm-4">
  			 					<div class="anhmon">
  			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/3.jpg" alt="" class="img-fluid">
+ 			 						<img src="<?php echo 'admin3/uploads/product/'. $value['image']  ?>" alt="" class="img-fluid">
  			 					</div>
 
  			 					
@@ -232,212 +187,44 @@ mysqli_set_charset($conn,"utf-8");
  			 				<div class="col-xs-9 col-sm-8">
  			 					<div class="tenmon">
  			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
+ 			 							<span class="float-xs-right"><?php echo $value['price'] ?>.vnđ</span>
+ 			 							<b class="ten"><?php echo $value['name'] ?></b>
  			 						</div>
  			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
+ 			 							
  			 						</div>
  			 					</div>
  			 				</div>
  			 			</div> <!-- het row -->
  			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon sang">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/4.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon trua">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/5.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon toi">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/6.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 	 <div class="col-xs-12 col-sm-6 col-md-4   motmon trua">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/2.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon toi">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/4.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon toi">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/3.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon sang">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/6.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
- 			 		<div class="col-xs-12 col-sm-6 col-md-4   motmon trua">
- 			 			<div class="row">
- 			 				<div class="col-xs-3 col-sm-4">
- 			 					<div class="anhmon">
- 			 						<div class="tagnew">NEW</div>
- 			 						<img src="images/3.jpg" alt="" class="img-fluid">
- 			 					</div>
-
- 			 					
- 			 				</div>
- 			 				<div class="col-xs-9 col-sm-8">
- 			 					<div class="tenmon">
- 			 						<div class="tren">
- 			 							<span class="float-xs-right">$35.50</span>
- 			 							<b class="ten">Gosh Egg-White Omelet</b>
- 			 						</div>
- 			 						<div class="duoi">
- 			 							Mussel with tomato sauce, wine
- 			 						</div>
- 			 					</div>
- 			 				</div>
- 			 			</div> <!-- het row -->
- 			 		</div>  <!-- het motmon -->
-
+ 			 		<?php endforeach ?>
+ 			 	
+					<ul class="pagination">
+			<?php if($curent_page>1) :?>
+				<li><a href="product.php?page=<?php echo $curent_page-1 ?>">&laquo;</a></li>
+			<?php endif ?>
+				<?php for($i=1;$i<=$page;$i++) :
+					($curent_page == $i)?$active = 'class="active"' : $active='';
+					?>
+				<li <?php echo $active ?>><a href="product.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+				<?php endfor ?>
+				<?php if($curent_page<$page) :?>
+				<li ><a href="product.php?page=<?php echo $curent_page +1 ?>">&raquo;</a></li>
+				<?php endif ?>
+			</ul>
 
  			 	</div> <!-- het row -->
  			 </div>  <!-- het container -->
  			 
  		</div>  <!-- het noidungct -->
+ 		
+
  	</div>  <!-- HET THUCDONCT -->
   	<div class="slidemonan  wow fadeInUp">
  		<div class="container">
  			<div class="row">
  				<div class="col-sm-12">
- 					<h4> Our special Dishes</h4>
+ 					<h4>Món ăn đặc biệt</h4>
  				</div>
  			</div>
 
@@ -452,187 +239,60 @@ mysqli_set_charset($conn,"utf-8");
  							<div class="carousel-inner" role="listbox">
  								<div class="carousel-item active">
  									<div class="row">
+ 										<?php foreach ($product as $value): ?>
  										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
+ 											<img src="<?php echo 'admin3/uploads/product/'. $value['image']  ?>" alt="" class="anhspslide">
  											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
+ 												<div class="gia float-xs-right"><?php echo $value['price'] ?>.vnđ</div>
+ 												<div class="ten"><?php echo $value['name'] ?></div>
  											</div>
- 											<div class="tencongthuc">
+ 											<!-- <div class="tencongthuc">
  												Mussel with tomato sauce, wine
- 											</div>
+ 											</div> -->
  										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
+ 										<?php endforeach ?>
 
  										
  									</div> <!-- het row -->
 
  								</div>  <!-- HET CAROUSEL ITEM -->
- 								 <div class="carousel-item ">
+
+ 								<div class="carousel-item">
  									<div class="row">
+ 										<?php foreach ($product as $value): ?>
  										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
+ 											<img src="<?php echo 'admin3/uploads/product/'. $value['image']  ?>" alt="" class="anhspslide">
  											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
+ 												<div class="gia float-xs-right"><?php echo $value['price'] ?>.vnđ</div>
+ 												<div class="ten"><?php echo $value['name'] ?></div>
  											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
+ 											
  										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
+ 										<?php endforeach ?>
 
  										
  									</div> <!-- het row -->
 
  								</div>  <!-- HET CAROUSEL ITEM -->
-								<div class="carousel-item ">
+ 								<div class="carousel-item ">
  									<div class="row">
+ 										<?php foreach ($product as $value): ?>
  										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
+ 											<img src="<?php echo 'admin3/uploads/product/'. $value['image']  ?>" alt="" class="anhspslide">
  											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
+ 												<div class="gia float-xs-right"><?php echo $value['price'] ?>.vnđ</div>
+ 												<div class="ten"><?php echo $value['name'] ?></div>
  											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
+ 											
  										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
-
- 										<div class="sanpham">
- 											<img src="images/1.jpg" alt="" class="anhspslide">
- 											<div class="tensp">
- 												<div class="gia float-xs-right">$100</div>
- 												<div class="ten">Trio Sauce</div>
- 											</div>
- 											<div class="tencongthuc">
- 												Mussel with tomato sauce, wine
- 											</div>
- 										</div> <!-- SAN PHAM -->
+ 										<?php endforeach ?>
 
  										
  									</div> <!-- het row -->
 
  								</div>  <!-- HET CAROUSEL ITEM -->
+ 								 
+								
  								 
  							</div>
  							<a class="left carousel-control" href="#slidemonanduoi" role="button" data-slide="prev">
@@ -654,17 +314,20 @@ mysqli_set_charset($conn,"utf-8");
  	<div class="gioithieudaubep  wow fadeInUp">
  		<div class="container">
  			<div class="row">
+ 				<?php foreach ($about as $value): ?>
  				<div class="col-sm-4">
- 					<img src="http://betheme.muffingroupsc.netdna-cdn.com/be/restaurant/wp-content/uploads/2015/02/home_restaurant_heart_of_food.jpg" alt="" class="img-fluid">
+ 					<img src="<?php echo 'admin3/uploads/about/'.$value['image']  ?>" alt="" class="img-fluid">
  				</div>
  				<div class="col-sm-7 push-sm-1 ">
+ 					
  					<div class="thongtin">
- 						<h2 class="fontoswarld">Stevan Smith</h2>
- 						<span class="fontdancing">The Master of Cooking</span>
+ 						<h2 class="fontoswarld"><?php echo $value['name'] ?></h2>
+ 						<span class="fontdancing">CHUYÊN GIA ẨM THỰC</span>
  						<p>
- 							Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt.
+ 							<?php echo $value['content'] ?>
  						</p>
  					</div> <!-- het thong tin -->
+ 					<?php endforeach ?>
  					<div class="daubepcontact">
  						<a href="" class="icondb"><i class="fa fa-facebook"></i></a>
  						<a href="" class="icondb"><i class="fa fa-vimeo"></i></a>
@@ -693,70 +356,16 @@ mysqli_set_charset($conn,"utf-8");
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
 				<div class="thongtindatban fontroboto">
-					<h2 class="fontroboto">Make A Reservation</h2>
-					<p class="tt ">Booking a table has never been so easy with free   instant online restaurant reservations, booking now!!</p>
-					<p class="giodb">Monday to Friday   <span class="vang"> 9:00 am - 23:00 pm </span> Saturday to Sunday <span class="vang"> 10:00 am - 22:00 pm</span>
-	Note: Arctica Restaurant is closed on holidays.</p>
-					<div class="dtdb fontoswarld">0844.335.1211</div>
+					<h2 class="fontroboto">Sashimi - Ngôi vương của sự tinh khiết</h2>
+					<p class="tt ">Sashimi mềm mềm, tươi ngon, béo ngậy, được xếp một cách đẹp mắt trên khay cùng với củ cải trắng bào sợi và lá tía tô tạo nên một tổng thể ẩm thực đầy tinh tế. Sushi Kei còn chạm tới vị giác của thực khách với các món xào, súp bổ dưỡng, salad,... đậm đà phong vị Nhật Bản.!!</p>
+					<p class="giodb">Thứ 2 - 8 <span class="vang"> 9:00 am - 23:00 pm </span> Chủ nhật <span class="vang"> 10:00 am - 22:00 pm</span>
+	Note: Nhà hàng đóng cửa vào các ngày lễ.</p>
+					<div class="dtdb fontoswarld">+084 43351211</div>
 				</div>
 				
 
 			</div>
-			<div class="col-sm-3"></div>
-
-			<div class="col-sm-10 push-sm-1">
 			
-				<div class="formdatban">
-					<div class="row">
-						<div class="col-sm-12">
-							<h2 class="text-xs-center fontroboto">Book Your Table Online</h2>
-
-						</div>
-						
-						<div class="col-sm-4">						 
-								<div class="form-group">								 
-									<input type="text" class="form-control" placeholder="Your Name * ">
-								</div>	 
-						</div>
-						<div class="col-sm-4">						 
-								<div class="form-group">								 
-									<input type="email" class="form-control" placeholder="Your Email * ">
-								</div>	 
-						</div>
-						<div class="col-sm-4">						 
-								<div class="form-group">								 
-									<input type="number" class="form-control" placeholder="Your Mobile * ">
-								</div>	 
-						</div>
-						<div class="col-sm-4">						 
-								<div class="form-group">								 
-									<input type="date" class="form-control" placeholder="Date * ">
-								</div>	 
-						</div>
-						
-						<div class="col-sm-4">						 
-								<div class="form-group">								 
-									<input type="time" class="form-control" placeholder="Time * ">
-								</div>	 
-						</div>
-						<div class="col-sm-4">						 
-								<div class="form-group">								 
-									<input type="number" class="form-control" placeholder="No. of person * ">
-								</div>	 
-						</div>
-
-						<div class="col-sm-12 text-xs-center">
-							<a href="
-							" class="btn btn-warning datban2">
-								Book table Now
-							</a>
-						</div>
-						
-
-					</div>
-					 
-				</div> <!-- het form dat ban -->
-			</div>
 		</div> <!-- het row -->
 			
 		</div><!--  het container -->
@@ -774,33 +383,16 @@ mysqli_set_charset($conn,"utf-8");
 							<li data-target="#slidetestimnial" data-slide-to="2"></li>
 						</ol>
 						<div class="carousel-inner" role="listbox">
+							<?php foreach ($about as $value): ?>
 							<div class="carousel-item active">
 							 	 <i class="fa fa-quote-right"></i>
 							 	 <div class="quote">
-							 	 	We enjoy sharing the projects and posts we make just as much as we enjoy creating them.
- consectetur adipiscing elit, sed do eiusmod tempor incididunt Sit back & take a moment to browse through some of our recent completed work.
+							 	 	<?php echo $value['content'] ?>
 							 	 </div>
-							 	 <b class="fontdancing tennguoi"> Marvel </b>
+							 	 <b class="fontdancing tennguoi"> <?php echo $value['name'] ?> </b>
 
 							</div> 
-							 <div class="carousel-item ">
-							 	 <i class="fa fa-quote-right"></i>
-							 	 <div class="quote">
-							 	 	We enjoy sharing the projects and posts we make just as much as we enjoy creating them.
- consectetur adipiscing elit, sed do eiusmod tempor incididunt Sit back & take a moment to browse through some of our recent completed work.
-							 	 </div>
-							 	 <b class="fontdancing tennguoi"> Marvel </b>
-
-							</div> 
-							<div class="carousel-item ">
-							 	 <i class="fa fa-quote-right"></i>
-							 	 <div class="quote">
-							 	 	We enjoy sharing the projects and posts we make just as much as we enjoy creating them.
- consectetur adipiscing elit, sed do eiusmod tempor incididunt Sit back & take a moment to browse through some of our recent completed work.
-							 	 </div>
-							 	 <b class="fontdancing tennguoi"> Marvel </b>
-
-							</div> 
+							<?php endforeach ?>
 							
 						</div>
 						 
@@ -815,18 +407,18 @@ mysqli_set_charset($conn,"utf-8");
 			<div class="row">
 				<div class="col-sm-12 text-xs-center wow  flipInY" data-wow-delay="0s">
 					<div class="tdtintuchome">
-						<span class="fontdancing">Our Blog</span>
-						<h2 class="fontroboto">Lastest News Update</h2>
+						<span class="fontdancing">Blog</span>
+						<h2 class="fontroboto">Cập nhật tin tức mới nhất</h2>
 					</div>
 				</div>
-
+				<?php foreach ($about2 as $value): ?>
 				<div class="col-md-4 col-sm-6 col-xs-12 wow  flipInY" data-wow-delay="0s">
 
 					<div class="mottinchuan">
-						<a href=""><img src="images/f1.jpg" alt=""></a>
-						<a href="" class="tieudetin1 fontoswarld">The Best Tips For Tasty Food</a>
-						<div class="ngaythang1">10 June 2016  by <span class="vang"> Peter Parker</span></div>
-						<p class="fontroboto">Curabitur quas nets lacusets nulat iaculis loremis etis nisle varius vitae seditum fugiatum ligul aliquam qui sequi nets lacusets nulat </p>
+						<a href=""><img src="<?php echo 'admin3/uploads/about/'. $value['image']  ?>" alt=""></a>
+						<a href="" class="tieudetin1 fontoswarld"><?php echo $value['name'] ?></a>
+						<div class="ngaythang1">10 - 05 - 2020  by <span class="vang"> Tanaka</span></div>
+						<p class="fontroboto"><?php echo $value['content'] ?></p>
 
 						<div class="docthem mb-2">
 							<div class="like float-xs-right fontroboto">10 like</div>
@@ -834,111 +426,15 @@ mysqli_set_charset($conn,"utf-8");
 						</div>
 					</div>
 				</div> 
-				<div class="col-md-4 col-sm-6 col-xs-12 wow  flipInY" data-wow-delay="0s">
-					<div class="mottinchuan">
-
-						<a href=""><img src="images/f1-03.jpg" alt=""></a>
-						<a href="" class="tieudetin1 fontoswarld">The Best Tips For Tasty Food</a>
-						<div class="ngaythang1">10 June 2016  by <span class="vang"> Peter Parker</span></div>
-						<p class="fontroboto">Curabitur quas nets lacusets nulat iaculis loremis etis nisle varius vitae seditum fugiatum ligul aliquam qui sequi nets lacusets nulat </p>
-
-						<div class="docthem mb-2">
-							<div class="like float-xs-right fontroboto">10 like</div>
-							<a href="" class="rm fontroboto">Read More</a>
-						</div> 
-					</div> 
-
-				</div> 
-				<div class="col-md-4 col-sm-6 col-xs-12 wow  flipInY" data-wow-delay="0s">
-					<div class="mottinchuan">
-
-						<a href=""><img src="images/f1-02.jpg" alt=""></a>
-						<a href="" class="tieudetin1 fontoswarld">Những lời khuyên tốt nhất cho thực phẩm ngon</a>
-						<div class="ngaythang1">10 June 2016  by <span class="vang"> Peter Parker</span></div>
-						<p class="fontroboto">Curabitur quas nets lacusets nulat iaculis loremis etis nisle varius vitae seditum fugiatum ligul aliquam qui sequi nets lacusets nulat </p>
-
-						<div class="docthem mb-2">
-							<div class="like float-xs-right fontroboto">10 like</div>
-							<a href="" class="rm fontroboto">Read More</a>
-						</div>
-					</div>
-
-				</div> 
+				<?php endforeach ?>
+				
 
 			</div>
 		</div>
 
 	</div>  <!-- HET TIN TUC O TRANG HOME -->
 
-	<div class="footertop">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3 cotf1 mb-2 wow fadeInUp" data-wow-delay="0s">
-					<a href=""><img src="images/logofoot.png" alt="" class="logof"></a>
-					<p>Marsh mallow muffin soufflé jelly-o tart cake Marshmallow macaroon jelly jubes dont tiramisu croissant cake.</p>
-					<div class="motdong">
-						<i class="fa fa-paper-plane-o"></i>
-						<span class="textmd">Address : 44 New Design Street,<br>
-						Melbourne 005</span>
-					</div>
-					<div class="motdong">
-						<i class="fa fa-phone"></i>
-						<span class="textmd">Phone : (84) 800 433 633</span>
-					</div>
-					<div class="motdong">
-						<i class="fa fa-envelope-o"></i>
-						<span class="textmd">Email : info@Example.com</span>
-					</div>
-					
-
-				</div>  <!-- HET COTF1 -->
-				<div class="col-sm-2 push-sm-1 cotf2 mb-2  wow fadeInUp" data-wow-delay="0.1s">
-					<h2 class="tdft">Liên kết người dùng </h2>
-					<ul>
-						<li><a href="">Công ty </a></li>
-						<li><a href="">Dự phòng </a></li>
-						<li><a href="">Trung tâm trợ giúp  </a></li>
-						<li><a href="">Blog của chúng tôi </a></li>
-						<li><a href="">Nghề nghiệp  </a></li>
-						<li><a href="">Liên hệ chúng tôi</a></li>
-					</ul>
-				</div>  <!-- HET COTF2 -->
-				<div class="col-sm-3  cotf3 mb-2 wow  fadeInUp" data-wow-delay="0.2s">
-					<h2 class="tdft">Liên kết người dùng 2</h2>
-					<ul>
-						<li><a href="">Công ty </a></li>
-						<li><a href="">Dự phòng </a></li>
-						<li><a href="">Trung tâm trợ giúp  </a></li>
-						<li><a href="">Blog của chúng tôi </a></li>
-						<li><a href="">Nghề nghiệp  </a></li>
-						<li><a href="">Liên hệ chúng tôi</a></li>
-					</ul>
-				</div>  <!-- HET COTF3 -->
-				<div class="col-sm-3  cotf4 wow  fadeInUp" data-wow-delay="0.3s">
-					<h2 class="tdft">Giờ mở cửa </h2>
-					<div class="openning1">
-						<div class="phai float-xs-right">9:00 am - 23:00 pm</div>
-						<div class="trai">Thứ 2 —— Thứ 6</div>
-					</div>
-					 <div class="openning1">
-						<div class="phai float-xs-right">10:00 am - 23:00 pm</div>
-						<div class="trai">Thứ bảy </div>
-					</div>
-					 <div class="openning1">
-						<div class="phai float-xs-right">10:00 am - 23:00 pm</div>
-						<div class="trai">Chủ nhật   </div>
-					</div>
-					 
-					<p>Note: Nhà hàng Arctica đóng cửa vào các ngày lễ.</p>
-				</div>  <!-- HET COTF4 -->
-				
-			</div>
-		</div>
-	</div>  <!-- HET FOOTERTOP -->
-
-	<div class="footerbottom text-xs-center fontroboto wow  fadeInUp" data-wow-delay="0s">
-		 Copyrights © 2020  All Rights Reserved. 
-	</div>
+	<?php include "footer.php"; ?>
 
 </body>
 </html>

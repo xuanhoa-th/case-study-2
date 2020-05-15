@@ -69,15 +69,24 @@ class ProcuctController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $id = $_GET['id'];
-            $product = $this->ProductDB->getIdProduct($id);
             $category =$this->CategoryDB->getAll();
-//            var_dump($category);
-//            die();
+            $product = $this->ProductDB->getIdProduct($id);
+
+
             include 'view/product/editProduct.php';
         } else {
             $id = $_POST['id'];
-            $product = new Product($_POST['name'], $_POST['image'], $_POST['price'], $_POST['status'], $_POST['category_id']);
+            $file = $_FILES['image'];
+            $fileName = $file['name'];
+            move_uploaded_file($file['tmp_name'], 'uploads/product/'. $fileName);
+
+
+            $product = new Product($_POST['name'],$fileName, $_POST['price'], $_POST['status'], $_POST['category_id']);
+//            var_dump($product);
+//            die();
+
             $this->ProductDB->update($id, $product);
+
             echo "<script>window.location='./index.php?page=listProduct'</script>";
         }
     }

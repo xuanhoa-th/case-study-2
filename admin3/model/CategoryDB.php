@@ -55,7 +55,7 @@ class CategoryDB
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(1, $category->name);
 
-        $statement->bindParam(3, $id);
+        $statement->bindParam(2, $id);
         return $statement->execute();
     }
 
